@@ -25,8 +25,11 @@ function readyForStart() {
   resetMovesAndStars();
 }
 
+//重置配对步数和星星
 function resetMovesAndStars() {
   app.totalMoves = 0;
+  app.successMatches = 0;
+  app.totalStars = 3;
   movesEl.innerHTML = 0;
   let starOElements = document.querySelectorAll(".fa-star-o");
   if (starOElements && starOElements.length > 0) {
@@ -94,9 +97,9 @@ function cardClicked() {
         addTwoAnimateRubber(app.openCardList[0], app.openCardList[1]);
         app.openCardList = [];
         //全部配对成功弹出信息
+        console.log(app.successMatches);
         if (app.successMatches == 8) {
           console.log("all success");
-          app.successCardList = 0;
           displayResult();
         }
       }

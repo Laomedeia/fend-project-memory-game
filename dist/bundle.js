@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bfe48a7c04feba9f4ef2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ef66f8791156f84e5e16"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1242,8 +1242,11 @@ function readyForStart() {
   resetMovesAndStars();
 }
 
+//重置配对步数和星星
 function resetMovesAndStars() {
   __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].totalMoves = 0;
+  __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches = 0;
+  __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].totalStars = 3;
   movesEl.innerHTML = 0;
   let starOElements = document.querySelectorAll(".fa-star-o");
   if (starOElements && starOElements.length > 0) {
@@ -1305,9 +1308,9 @@ function cardClicked() {
         addTwoAnimateRubber(__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[0], __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[1]);
         __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList = [];
         //全部配对成功弹出信息
+        console.log(__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches);
         if (__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches == 8) {
           console.log("all success");
-          __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successCardList = 0;
           displayResult();
         }
       }
