@@ -3,26 +3,28 @@ export default {
  * Create a list that holds all of your cards
  */
   cardList: [
-    "<li class='card'><i class='fa fa-diamond'></i></li>",
-    "<li class='card'><i class='fa fa-paper-plane-o'></i></li>",
-    "<li class='card'><i class='fa fa-anchor'></i></li>",
-    "<li class='card'><i class='fa fa-bolt'></i></li>",
-    "<li class='card'><i class='fa fa-cube'></i></li>",
-    "<li class='card'><i class='fa fa-leaf'></i></li>",
-    "<li class='card'><i class='fa fa-bicycle'></i></li>",
-    "<li class='card'><i class='fa fa-bomb'></i></li>",
-    "<li class='card'><i class='fa fa-diamond'></i></li>",
-    "<li class='card'><i class='fa fa-paper-plane-o'></i></li>",
-    "<li class='card'><i class='fa fa-anchor'></i></li>",
-    "<li class='card'><i class='fa fa-bolt'></i></li>",
-    "<li class='card'><i class='fa fa-cube'></i></li>",
-    "<li class='card'><i class='fa fa-leaf'></i></li>",
-    "<li class='card'><i class='fa fa-bicycle'></i></li>",
-    "<li class='card'><i class='fa fa-bomb'></i></li>"
+    "<li class='card animated shake'><i class='fa fa-diamond'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-paper-plane-o'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-anchor'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-bolt'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-cube'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-leaf'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-bicycle'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-bomb'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-diamond'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-paper-plane-o'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-anchor'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-bolt'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-cube'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-leaf'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-bicycle'></i></li>",
+    "<li class='card animated shake'><i class='fa fa-bomb'></i></li>"
   ],
 
   //配对点击次数
   totalMoves: 0,
+  //获得星星数
+  totalStars: 3,
   //点开的卡片列表
   openCardList: [],
   //成功配对数，如果length==8则全部匹配成功
@@ -86,16 +88,18 @@ export default {
   calcStars: function(starElement) {
     switch (this.totalMoves) {
       case 11:
+        this.totalStars -= 1;
         starElement.lastElementChild.firstChild.className = "fa fa-star-o";
         break;
       case 21:
+        this.totalStars -= 1;
         starElement.children[1].firstChild.className = "fa fa-star-o";
         break;
       default:
         break;
     }
   },
-  
+
   calcMoves: function(movesElement) {
     this.totalMoves += 1;
     movesElement.innerHTML = this.totalMoves;

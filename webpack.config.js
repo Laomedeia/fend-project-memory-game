@@ -21,30 +21,22 @@ module.exports = {
   },
   // 使用loader模块
   module: {
-    rules: [
-      {
-        test: /(\.jsx|\.js)$/,
-        use: {
-          loader: "babel-loader"
-        },
-        exclude: /node_modules/
+    loaders:[
+      { 
+        test: /\.css$/, 
+        loader: 'style-loader!css-loader' 
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                modules: true
-              }
-            },
-            {
-              loader: "postcss-loader"
-            }
-          ]
-        })
+          test: /\.js[x]?$/,
+          exclude: '/node_modules/',
+          loader: 'babel-loader'
+      },
+      {
+        test: /\.(png|jpe?g|gif|ico)(\?\S*)?$/,
+        loader: 'file-loader',
+        query: {
+            name: 'img/[name].[ext]'
+        } 
       }
     ]
   },
