@@ -103,5 +103,20 @@ export default {
   calcMoves: function(movesElement) {
     this.totalMoves += 1;
     movesElement.innerHTML = this.totalMoves;
+  },
+
+  elapsedTime : (hour,min,sec,timeElement) => {
+    return setInterval(() => {
+      sec += 1;
+      if(sec === 60) {
+        min += 1;
+        sec = 0;
+      }
+      if(min === 60) {
+        hour += 1;
+        min = 0;
+      }
+      timeElement.innerHTML = hour+":"+min+":"+sec;
+    }, 1000);
   }
 };

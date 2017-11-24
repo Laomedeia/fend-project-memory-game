@@ -3,6 +3,7 @@ import "./css/app.css";
 import "animate.css/animate.min.css";
 
 let cardEl;
+let previousTimerId;
 const appEl = document.querySelector("#app");
 const passEl = document.querySelector("#pass");
 const deckEl = document.querySelector("#deck");
@@ -12,6 +13,8 @@ const starEl = document.querySelector(".stars");
 const restartEl = document.querySelector("#restart");
 const totalMovesEl = document.querySelector("#totalMoves");
 const totalStarsEl = document.querySelector("#totalStars");
+const timerEl = document.querySelector("#timer");
+
 //准备开始
 readyForStart();
 //绑定restart deck event
@@ -23,6 +26,13 @@ function readyForStart() {
   app.initGame(deckEl);
   addCardClickListener();
   resetMovesAndStars();
+  startTimer();
+}
+
+//开始计时
+function startTimer() {
+  clearInterval(previousTimerId);
+  previousTimerId = app.elapsedTime(0,0,0,timerEl);
 }
 
 //重置配对步数和星星
@@ -97,7 +107,6 @@ function cardClicked() {
         addTwoAnimateRubber(app.openCardList[0], app.openCardList[1]);
         app.openCardList = [];
         //全部配对成功弹出信息
-        console.log(app.successMatches);
         if (app.successMatches == 8) {
           console.log("all success");
           displayResult();

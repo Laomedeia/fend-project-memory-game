@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ef66f8791156f84e5e16"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "092d23153a2b5c96d2e5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1220,6 +1220,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 let cardEl;
+let previousTimerId;
 const appEl = document.querySelector("#app");
 const passEl = document.querySelector("#pass");
 const deckEl = document.querySelector("#deck");
@@ -1229,6 +1230,8 @@ const starEl = document.querySelector(".stars");
 const restartEl = document.querySelector("#restart");
 const totalMovesEl = document.querySelector("#totalMoves");
 const totalStarsEl = document.querySelector("#totalStars");
+const timerEl = document.querySelector("#timer");
+
 //准备开始
 readyForStart();
 //绑定restart deck event
@@ -1240,6 +1243,13 @@ function readyForStart() {
   __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].initGame(deckEl);
   addCardClickListener();
   resetMovesAndStars();
+  startTimer();
+}
+
+//开始计时
+function startTimer() {
+  clearInterval(previousTimerId);
+  previousTimerId = __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].elapsedTime(0, 0, 0, timerEl);
 }
 
 //重置配对步数和星星
@@ -1308,7 +1318,6 @@ function cardClicked() {
         addTwoAnimateRubber(__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[0], __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[1]);
         __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList = [];
         //全部配对成功弹出信息
-        console.log(__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches);
         if (__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches == 8) {
           console.log("all success");
           displayResult();
@@ -1434,6 +1443,21 @@ function addTwoAnimateRubber(element1, element2) {
   calcMoves: function (movesElement) {
     this.totalMoves += 1;
     movesElement.innerHTML = this.totalMoves;
+  },
+
+  elapsedTime: (hour, min, sec, timeElement) => {
+    return setInterval(() => {
+      sec += 1;
+      if (sec === 60) {
+        min += 1;
+        sec = 0;
+      }
+      if (min === 60) {
+        hour += 1;
+        min = 0;
+      }
+      timeElement.innerHTML = hour + ":" + min + ":" + sec;
+    }, 1000);
   }
 });
 
