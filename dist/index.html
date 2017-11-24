@@ -1,29 +1,39 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Card Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">    
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <!-- <link rel="stylesheet" href="src/css/app.css"> -->
 </head>
+
 <body>
 
     <div class="container" id="app">
         <header>
             <h1>Card Matching Game</h1>
         </header>
-        <span>time elapsed: <span id="timer"></span></span>                
-        
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+        <div>time elapsed:
+            <span id="timer"></span>
+        </div>
 
-        	<span class="moves">0</span> Moves
+        <section class="score-panel">
+            <ul class="stars">
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+            </ul>
+
+            <span class="moves">0</span> Moves
 
             <div class="restart" id="restart">
                 <i class="fa fa-repeat"></i>
@@ -34,20 +44,23 @@
         <ul class="deck" id="deck">
         </ul>
     </div>
-
-    <ul id="pass" class="pass-tips hidden">
-        <li>
-            <h3>Congratulations! You Won!</h3>                
-        </li>
-        <li>
-        <h5>With
-            <span id="totalMoves"></span> Moves and
-            <span id="totalStars"></span> Stars. Woooooo!</h5>
+    <div>
+        <ul id="pass" class="pass-tips hidden">
+            <li>
+                <h3>Congratulations! You Won!</h3>
             </li>
-        <li>
-            <a href="#" id="play-again" class="button big green">Play again!</a>            
-        </li>
-    </ul>
+            <li>
+                <h5>With
+                    <span id="totalMoves"></span> Moves and
+                    <span id="totalStars"></span> Stars. Woooooo! Time Elapsed:
+                    <span id="elapsed"></span>
+                </h5>
+            </li>
+            <li>
+                <a href="#" id="play-again" class="button big green">Play again!</a>
+            </li>
+        </ul>
     </div>
 <script type="text/javascript" src="bundle.js"></script></body>
+
 </html>

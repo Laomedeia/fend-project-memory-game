@@ -13,6 +13,7 @@ const starEl = document.querySelector(".stars");
 const restartEl = document.querySelector("#restart");
 const totalMovesEl = document.querySelector("#totalMoves");
 const totalStarsEl = document.querySelector("#totalStars");
+const totalElapsedEl = document.querySelector("#elapsed");
 const timerEl = document.querySelector("#timer");
 
 //准备开始
@@ -122,6 +123,7 @@ function displayResult() {
   passEl.classList.add("display");
   totalMovesEl.innerHTML = app.totalMoves;
   totalStarsEl.innerHTML = app.totalStars;
+  totalElapsedEl.innerHTML = timerEl.innerHTML;
 }
 
 function setClickAnimate(element) {

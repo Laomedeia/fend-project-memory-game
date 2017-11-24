@@ -89,11 +89,11 @@ export default {
     switch (this.totalMoves) {
       case 11:
         this.totalStars -= 1;
-        starElement.lastElementChild.firstChild.className = "fa fa-star-o";
+        starElement.children[2].children[0].className = "fa fa-star-o";
         break;
       case 21:
         this.totalStars -= 1;
-        starElement.children[1].firstChild.className = "fa fa-star-o";
+        starElement.children[1].children[0].className = "fa fa-star-o";
         break;
       default:
         break;

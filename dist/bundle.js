@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "092d23153a2b5c96d2e5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "de23cb0a285c028e4253"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1230,6 +1230,7 @@ const starEl = document.querySelector(".stars");
 const restartEl = document.querySelector("#restart");
 const totalMovesEl = document.querySelector("#totalMoves");
 const totalStarsEl = document.querySelector("#totalStars");
+const totalElapsedEl = document.querySelector("#elapsed");
 const timerEl = document.querySelector("#timer");
 
 //准备开始
@@ -1333,6 +1334,7 @@ function displayResult() {
   passEl.classList.add("display");
   totalMovesEl.innerHTML = __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].totalMoves;
   totalStarsEl.innerHTML = __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].totalStars;
+  totalElapsedEl.innerHTML = timerEl.innerHTML;
 }
 
 function setClickAnimate(element) {
@@ -1429,11 +1431,11 @@ function addTwoAnimateRubber(element1, element2) {
     switch (this.totalMoves) {
       case 11:
         this.totalStars -= 1;
-        starElement.lastElementChild.firstChild.className = "fa fa-star-o";
+        starElement.children[2].children[0].className = "fa fa-star-o";
         break;
       case 21:
         this.totalStars -= 1;
-        starElement.children[1].firstChild.className = "fa fa-star-o";
+        starElement.children[1].children[0].className = "fa fa-star-o";
         break;
       default:
         break;
