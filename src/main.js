@@ -16,13 +16,13 @@ const totalStarsEl = document.querySelector("#totalStars");
 const totalElapsedEl = document.querySelector("#elapsed");
 const timerEl = document.querySelector("#timer");
 
-//准备开始
 readyForStart();
-//绑定restart deck event
 addRestartEvent(restartEl);
-//绑定play again event
 addPlayAgainEvent(playAgainEl);
 
+/**
+ * @description 准备开始
+ */
 function readyForStart() {
   app.initGame(deckEl);
   addCardClickListener();
@@ -30,13 +30,17 @@ function readyForStart() {
   startTimer();
 }
 
-//开始计时
+/**
+ * @description 开始计时
+ */
 function startTimer() {
   clearInterval(previousTimerId);
   previousTimerId = app.elapsedTime(0,0,0,timerEl);
 }
 
-//重置配对步数和星星
+/**
+ * @description 重置配对步数和星星
+ */
 function resetMovesAndStars() {
   app.totalMoves = 0;
   app.successMatches = 0;
@@ -50,6 +54,9 @@ function resetMovesAndStars() {
   }
 }
 
+/**
+ * @description Play again
+ */
 function playAgain() {
   appEl.classList.remove("hidden");
   passEl.classList.remove("display");
@@ -72,6 +79,9 @@ function addCardClickListener() {
   });
 }
 
+/**
+ * @description card点击事件
+ */
 function cardClicked() {
   var cardElement = this;
   var cardClassName = cardElement.className;
@@ -104,10 +114,11 @@ function cardClicked() {
           return;
         }, 1000);
       } else {
+        //配对成功
         removeTwoAnimateFlipY(app.openCardList[0], app.openCardList[1]);
         addTwoAnimateRubber(app.openCardList[0], app.openCardList[1]);
         app.openCardList = [];
-        //全部配对成功弹出信息
+        //弹出信息
         if (app.successMatches == 8) {
           console.log("all success");
           displayResult();
@@ -117,6 +128,9 @@ function cardClicked() {
   }
 }
 
+/**
+ * @description 显示成绩
+ */
 function displayResult() {
   appEl.classList.add("hidden");
   passEl.classList.remove("hidden");
@@ -126,16 +140,30 @@ function displayResult() {
   totalElapsedEl.innerHTML = timerEl.innerHTML;
 }
 
+/**
+ * @description 设置动画
+ * @param {any} element 
+ */
 function setClickAnimate(element) {
   element.classList.remove("shake");
   element.classList.add("flipInY");
 }
 
+/**
+ * @description 移除动画
+ * @param {any} element1 
+ * @param {any} element2 
+ */
 function removeTwoAnimateFlipY(element1, element2) {
   element1.classList.remove("flipInY");
   element2.classList.remove("flipInY");
 }
 
+/**
+ * @description 设置动画
+ * @param {any} element1 
+ * @param {any} element2 
+ */
 function addTwoAnimateRubber(element1, element2) {
   element1.classList.add("rubberBand");
   element2.classList.add("rubberBand");

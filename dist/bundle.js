@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "de23cb0a285c028e4253"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "363436c541fa298b1544"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1233,13 +1233,13 @@ const totalStarsEl = document.querySelector("#totalStars");
 const totalElapsedEl = document.querySelector("#elapsed");
 const timerEl = document.querySelector("#timer");
 
-//准备开始
 readyForStart();
-//绑定restart deck event
 addRestartEvent(restartEl);
-//绑定play again event
 addPlayAgainEvent(playAgainEl);
 
+/**
+ * @description 准备开始
+ */
 function readyForStart() {
   __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].initGame(deckEl);
   addCardClickListener();
@@ -1247,13 +1247,17 @@ function readyForStart() {
   startTimer();
 }
 
-//开始计时
+/**
+ * @description 开始计时
+ */
 function startTimer() {
   clearInterval(previousTimerId);
   previousTimerId = __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].elapsedTime(0, 0, 0, timerEl);
 }
 
-//重置配对步数和星星
+/**
+ * @description 重置配对步数和星星
+ */
 function resetMovesAndStars() {
   __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].totalMoves = 0;
   __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches = 0;
@@ -1267,6 +1271,9 @@ function resetMovesAndStars() {
   }
 }
 
+/**
+ * @description Play again
+ */
 function playAgain() {
   appEl.classList.remove("hidden");
   passEl.classList.remove("display");
@@ -1289,6 +1296,9 @@ function addCardClickListener() {
   });
 }
 
+/**
+ * @description card点击事件
+ */
 function cardClicked() {
   var cardElement = this;
   var cardClassName = cardElement.className;
@@ -1315,10 +1325,11 @@ function cardClicked() {
           return;
         }, 1000);
       } else {
+        //配对成功
         removeTwoAnimateFlipY(__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[0], __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[1]);
         addTwoAnimateRubber(__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[0], __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList[1]);
         __WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].openCardList = [];
-        //全部配对成功弹出信息
+        //弹出信息
         if (__WEBPACK_IMPORTED_MODULE_0__js_app_js__["a" /* default */].successMatches == 8) {
           console.log("all success");
           displayResult();
@@ -1328,6 +1339,9 @@ function cardClicked() {
   }
 }
 
+/**
+ * @description 显示成绩
+ */
 function displayResult() {
   appEl.classList.add("hidden");
   passEl.classList.remove("hidden");
@@ -1337,16 +1351,30 @@ function displayResult() {
   totalElapsedEl.innerHTML = timerEl.innerHTML;
 }
 
+/**
+ * @description 设置动画
+ * @param {any} element 
+ */
 function setClickAnimate(element) {
   element.classList.remove("shake");
   element.classList.add("flipInY");
 }
 
+/**
+ * @description 移除动画
+ * @param {any} element1 
+ * @param {any} element2 
+ */
 function removeTwoAnimateFlipY(element1, element2) {
   element1.classList.remove("flipInY");
   element2.classList.remove("flipInY");
 }
 
+/**
+ * @description 设置动画
+ * @param {any} element1 
+ * @param {any} element2 
+ */
 function addTwoAnimateRubber(element1, element2) {
   element1.classList.add("rubberBand");
   element2.classList.add("rubberBand");
@@ -1358,11 +1386,11 @@ function addTwoAnimateRubber(element1, element2) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-  /*
-  * Create a list that holds all of your cards
-  */
-  cardList: ["<li class='card animated shake'><i class='fa fa-diamond'></i></li>", "<li class='card animated shake'><i class='fa fa-paper-plane-o'></i></li>", "<li class='card animated shake'><i class='fa fa-anchor'></i></li>", "<li class='card animated shake'><i class='fa fa-bolt'></i></li>", "<li class='card animated shake'><i class='fa fa-cube'></i></li>", "<li class='card animated shake'><i class='fa fa-leaf'></i></li>", "<li class='card animated shake'><i class='fa fa-bicycle'></i></li>", "<li class='card animated shake'><i class='fa fa-bomb'></i></li>", "<li class='card animated shake'><i class='fa fa-diamond'></i></li>", "<li class='card animated shake'><i class='fa fa-paper-plane-o'></i></li>", "<li class='card animated shake'><i class='fa fa-anchor'></i></li>", "<li class='card animated shake'><i class='fa fa-bolt'></i></li>", "<li class='card animated shake'><i class='fa fa-cube'></i></li>", "<li class='card animated shake'><i class='fa fa-leaf'></i></li>", "<li class='card animated shake'><i class='fa fa-bicycle'></i></li>", "<li class='card animated shake'><i class='fa fa-bomb'></i></li>"],
+  //卡片图案种类
+  cardSymbols: ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"],
 
+  //card html dom array
+  cardList: [],
   //配对点击次数
   totalMoves: 0,
   //获得星星数
@@ -1374,9 +1402,17 @@ function addTwoAnimateRubber(element1, element2) {
 
   //初始化游戏
   initGame: function (deckElment) {
-    var shuffleCards = this.shuffle(this.cardList).join("");
+    if (this.cardList.length == 0) {
+      for (let i = 0; i < 2; i++) {
+        this.cardSymbols.forEach(element => {
+          let cardStr = "<li class='card animated shake'><i class='" + element + "'></i></li>";
+          this.cardList.push(cardStr);
+        });
+      }
+    }
+    // console.log(this.cardList);
+    let shuffleCards = this.shuffle(this.cardList).join("");
     deckElment.innerHTML = shuffleCards;
-    // console.log(shuffleCards);
   },
 
   // Shuffle function from http://stackoverflow.com/a/2450976
@@ -1392,7 +1428,6 @@ function addTwoAnimateRubber(element1, element2) {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-
     return array;
   },
 
@@ -1417,6 +1452,7 @@ function addTwoAnimateRubber(element1, element2) {
     });
   },
 
+  //比较两个card
   compareTwoCardsIsEqual: function (card1, card2) {
     var symbol1 = card1.innerHTML;
     var symbol2 = card2.innerHTML;
@@ -1427,6 +1463,7 @@ function addTwoAnimateRubber(element1, element2) {
     return false;
   },
 
+  //计算星星
   calcStars: function (starElement) {
     switch (this.totalMoves) {
       case 11:
@@ -1442,6 +1479,7 @@ function addTwoAnimateRubber(element1, element2) {
     }
   },
 
+  //计算匹配次数
   calcMoves: function (movesElement) {
     this.totalMoves += 1;
     movesElement.innerHTML = this.totalMoves;
